@@ -1,0 +1,30 @@
+metadata:
+  name: View camera feed in kitchen when someone in front of camera
+  description: Camera feed turns on kitchen display when someone at the front door and the camera sees them
+automations:
+  - starters:
+      - type: device.event.PersonDetection # A person has been detected by the camera. # A familiar face has been detected by the camera.
+        device: Front Porch - Front yard
+        suppressFor: 5 min
+      - type: device.event.MovingVehicleDetection # A moving vehicle has been detected by the camera.
+        device: Front Porch - Front yard
+        suppressFor: 5 min
+
+    condition:
+      type: or
+      conditions:
+        - type: time.between
+          after: 10:00:00 AM
+          before: 03:00:00 PM
+        - type: time.between
+          after: 04:00:00 PM
+          before: 10:00:00 PM
+
+    actions:
+      - type: assistant.command.OkGoogle
+        devices: Living room speakers - Living Room
+        okGoogle: repeat after me; "there is someone at the front door"
+
+      - type: assistant.command.OkGoogle
+        devices: Living room speakers - Living Room
+        okGoogle: Display the front porch camera on kitchen display
