@@ -1,0 +1,31 @@
+metadata:
+  name: AC on notification
+  description: AC on notification
+automations:
+  - starters:
+      - type: device.state.TemperatureSetting
+        device: Nest Thermostat - Dining Room
+        state: thermostatMode
+        is: on
+      - type: device.state.TemperatureSetting
+        device: Nest Thermostat - Dining Room
+        state: thermostatMode
+        is: heat
+      - type: device.state.TemperatureSetting
+        device: Nest Thermostat - Dining Room
+        state: thermostatMode
+        is: cool
+      - type: device.state.TemperatureSetting
+        device: Nest Thermostat - Dining Room
+        state: thermostatMode
+        is: heatcool
+    actions:
+      - type: assistant.command.Broadcast
+        devices:
+          - Living room speakers - Living Room
+        message: AC has been turned on, please close all windows and doors
+      - type: home.command.Notification
+        title: AC has been turned on, please close all windows and doors
+        members:
+          - <email of person A>
+          - <email of person B>
