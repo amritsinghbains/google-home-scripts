@@ -1,0 +1,23 @@
+metadata:
+  name: AC off notification
+  description: AC off notification
+automations:
+  - starters:
+      - type: device.state.TemperatureSetting
+        device: Nest Thermostat - Dining Room
+        state: thermostatMode
+        is: off
+      - type: device.state.TemperatureSetting
+        device: Nest Thermostat - Dining Room
+        state: thermostatMode
+        is: eco
+    actions:
+      - type: assistant.command.Broadcast
+        devices:
+          - Living room speakers - Living Room
+        message: AC has been turned off
+      - type: home.command.Notification
+        title: AC has been turned off
+        members:
+          - <email of Person A>
+          - <email of Person B>
